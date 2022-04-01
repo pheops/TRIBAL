@@ -1,40 +1,82 @@
 
 body {
-  overflow:  hidden;
-  margin:  0;
-background: #3D3D4A;
+  margin: 0;
+  height: 100%;
   font-family: sans-serif;
-    color:  white;
+  color:  white;
 }
 
-container {
+#c {
+/*  width: 100%;*/
+/*  height: 100%;*/
+  display: block;
 
 }
+
+.logo {
+  width:  90px;
+  margin-bottom:  25px;
+  position:  absolute;
+  top: 10px;
+  left: 10px;
+}
+
+ .IroWheel {
+width:  100px;
+
+  
+ }
+
+
+#dials {
+
+  position:  absolute;
+  bottom: 180px;
+  right: 0px;
+
+
+}
+
+
+
 
 
 .ui {
-  position: absolute;
+/*  position: absolute;*/
 }
 
  #HUD {
-  width: 220px;
- height: 800px;
- /* background-color: coral;*/
+
+/*  background: #3D3D4A;*/
+  width: 100%;
+ height: 200px;
+
   position:  absolute;
-  top: 100px;
-  left: 40px;
+  bottom: 0px;
+
+  
  }
 
 
 #web3 {
-  width: 220px;
- height: 200px;
- /* background-color: coral;*/
-  position:  absolute;
+  width: 150px;
+  height: 200px;
+  float:  left;
+/*  display: none;*/
+
+/*  position:  absolute;
   top: 100px;
-  right: 40px;
+  right: 40px;*/
  }
 
+
+#picker{
+  position:  absolute;
+  top: 20px;
+  right: 0px;
+  width: 120px;
+  float:  left;
+}
 
 .colorPicker{
   font-family:'Roboto',sans-serif;
@@ -43,6 +85,8 @@ container {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 10px;
+
+  float: left;
 
   outline: none !important;
 /*  background-color: #000000;
@@ -71,10 +115,6 @@ input[type="color"] {
   
 }
 
-.logo {
-  width:  190px;
-  margin-bottom:  25px;
-}
 
 
 
@@ -101,7 +141,7 @@ input[type="color"]:focus { outline: none !important; border: 0px; box-shadow: 0
 button{
 display:inline-block;
 width:  100%;
-padding:0.5em 3em;
+/*padding:0.5em 3em;*/
 border:0.16em solid #ffffff;
 /*margin:0 0.3em 0.3em 0;*/
 margin:  10px;
@@ -123,6 +163,7 @@ transition: all 0.15s;
 .dial-container {
   padding-top: 10px;
   display: inline-block;
+  float: left;
 }
 .block {
   margin: 0;
@@ -294,9 +335,14 @@ transition: all 0.15s;
 
 /* ---------hexbuttons-------------------------------- */
 
+#hex {
 
+/*    display: none;*/
+}
 
 .hexbuttons {
+  display: none;
+   float: right;
   display: block;
   margin-top: 20px ;
   width: 200px;

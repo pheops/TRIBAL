@@ -49,7 +49,7 @@ const params = {
 function init() {
 
         //const container = document.createElement( 'div' );
-        const container = document.getElementById( 'container' );
+        const container = document.getElementById( 'c' );
 
         //document.body.appendChild( container );
 
@@ -66,12 +66,16 @@ function init() {
         window.addEventListener( 'resize', onWindowResize );
 
         const aspect = window.innerWidth / window.innerHeight;
-        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
         //camera.position.set(-8,.5,0);
-        camera.position.z = -100;
+        camera.position.z = 7;
+        camera.position.y = 3;
 
-        controls = new OrbitControls( camera, container );
-        controls.target.set( 0, 0, 0 );
+        controls = new OrbitControls( camera, renderer.domElement);
+        controls.target.set( 0, 3, 0 );
+        // controls.maxPolarAngle = Math.PI / 2;
+        // controls.minPolarAngle = Math.PI / 2;
+
         controls.update();
 
         const pmremGenerator = new THREE.PMREMGenerator( renderer );
@@ -116,14 +120,15 @@ const environLoader = new THREE.TextureLoader(loadingManager );
         textureEquirec.encoding = THREE.sRGBEncoding;
 
         scene.environment = textureEquirec;
+        //scene.background = textureEquirec;
 
-const skyLoader = new THREE.TextureLoader(loadingManager );
+// const skyLoader = new THREE.TextureLoader(loadingManager );
 
-        skyEquirec = skyLoader.load( './assets/sky4.jpg' );
-        skyEquirec.mapping = THREE.EquirectangularReflectionMapping;
-        skyEquirec.encoding = THREE.sRGBEncoding;
+//         skyEquirec = skyLoader.load( './assets/sky4.jpg' );
+//         skyEquirec.mapping = THREE.EquirectangularReflectionMapping;
+//         skyEquirec.encoding = THREE.sRGBEncoding;
 
-        // scene.background = skyEquirec;
+       //scene.background = skyEquirec;
         //scene.background = new THREE.Color( 0x000000 );
 
 
@@ -131,45 +136,59 @@ const skyLoader = new THREE.TextureLoader(loadingManager );
 
 const loader = new THREE.TextureLoader(loadingManager);
     
-    const texture1 = loader.load( './assets/tribalStone_COLOR.png' );
+    const texture1 = loader.load( './assets/concrete_COLOR.png' );
      texture1.flipY=false
-    // const rough1 = loader.load( './assets/TDROUGH.png' );
-    //  rough1.flipY=false 
-    const normal1 = loader.load( './assets/tribalStone_NORMAL.png' );
+    const rough1 = loader.load( './assets/concrete_ROUGH.png' );
+     rough1.flipY=false 
+    const normal1 = loader.load( './assets/concrete_NORMAL.png' );
      normal1.flipY=false 
 
-    const texture2 = loader.load( './assets/tribalCob_COLOR.png' );
+    const texture2 = loader.load( './assets/asteroid_COLOR.png' );
      texture2.flipY=false
-    // const rough2 = loader.load( './assets/STONEROUGH.png' );
-    //  rough2.flipY=false 
-    const normal2 = loader.load( './assets/tribalCob_NORMAL.png' );
+    const rough2 = loader.load( './assets/asteroid_ROUGH.png' );
+     rough2.flipY=false 
+    const normal2 = loader.load( './assets/asteroid_NORMAL.png' );
      normal2.flipY=false  
 
-    const texture3 = loader.load( './assets/tribalMud_COLOR.png' );
+    const texture3 = loader.load( './assets/scratch_COLOR.png' );
      texture3.flipY=false
-    // const rough3 = loader.load( './assets/SCRATCHROUGH.png' );
-    //  rough3.flipY=false 
-    const normal3 = loader.load( './assets/tribalMud_NORMAL.png' );
+    const rough3 = loader.load( './assets/scratch_ROUGH.png' );
+     rough3.flipY=false 
+    const normal3 = loader.load( './assets/scratch_NORMAL.png' );
      normal3.flipY=false 
 
-    const texture4 = loader.load( './assets/tribalRed_COLOR.png' );
+    const texture4 = loader.load( './assets/clay_COLOR.png' );
      texture4.flipY=false
-    // const rough4 = loader.load( './assets/TDROUGH.png' );
-    //  rough4.flipY=false 
-    const normal4 = loader.load( './assets/tribalRed_NORMAL.png' );
+    const rough4 = loader.load( './assets/clay_ROUGH.png' );
+     rough4.flipY=false 
+    const normal4 = loader.load( './assets/clay_NORMAL.png' );
      normal4.flipY=false 
 
-     const texture5 = loader.load( './assets/tribalTD_COLOR.png' );
+    const texture5 = loader.load( './assets/tiedye_COLOR.png' );
      texture5.flipY=false
-    // const rough4 = loader.load( './assets/TDROUGH.png' );
-    //  rough4.flipY=false 
-    const normal5 = loader.load( './assets/tribalTD_NORMAL.png' );
+    const rough5 = loader.load( './assets/tiedye_ROUGH.png' );
+     rough5.flipY=false 
+    const normal5 = loader.load( './assets/tiedye_NORMAL.png' );
      normal5.flipY=false  
+
+    const texture6 = loader.load( './assets/crack_COLOR.png' );
+     texture6.flipY=false
+    const rough6 = loader.load( './assets/crack_ROUGH.png' );
+     rough6.flipY=false 
+    const normal6 = loader.load( './assets/crack_NORMAL.png' );
+     normal6.flipY=false  
+
+    const texture7 = loader.load( './assets/river_COLOR.png' );
+     texture7.flipY=false
+    const rough7 = loader.load( './assets/river_ROUGH.png' );
+     rough7.flipY=false 
+    const normal7 = loader.load( './assets/river_NORMAL.png' );
+     normal7.flipY=false   
 
 
     const material = new THREE.MeshStandardMaterial( 
       { map: texture1, 
-        // roughnessMap: rough1,
+        roughnessMap: rough1,
         normalMap: normal1,
 
 
@@ -212,14 +231,18 @@ function onButtonClick(event) {
     
      }   
 
-   if (event.target.id == "wallet"){
+  if (event.target.id == "wallet"){
     alert("devs do something");
-     }  
+     } 
+
+  if (event.target.id == "arView"){
+    arView();
+     }     
 
   if (event.target.id == "1"){
 
      material.map = texture1;
-     // material.roughnessMap = rough1;
+     material.roughnessMap = rough1;
      material.normalMap = normal1;
       //texture1.dispose();
 
@@ -229,7 +252,7 @@ function onButtonClick(event) {
   if (event.target.id == "2"){
 
      material.map = texture2;
-     // material.roughnessMap = rough2;
+     material.roughnessMap = rough2;
      material.normalMap = normal2;
   
      } 
@@ -237,7 +260,7 @@ function onButtonClick(event) {
   if (event.target.id == "3"){
 
      material.map = texture3;
-      // material.roughnessMap = rough3;
+     material.roughnessMap = rough3;
      material.normalMap = normal3;
   
      } 
@@ -245,18 +268,34 @@ function onButtonClick(event) {
   if (event.target.id == "4"){
 
      material.map = texture4;
-      // material.roughnessMap = rough4;
+     material.roughnessMap = rough4;
      material.normalMap = normal4;
   
      }  
 
-    if (event.target.id == "5"){
+  if (event.target.id == "5"){
 
      material.map = texture5;
-      // material.roughnessMap = rough4;
+     material.roughnessMap = rough5;
      material.normalMap = normal5;
   
-     }        
+     } 
+
+  if (event.target.id == "6"){
+
+     material.map = texture6;
+     material.roughnessMap = rough6;
+     material.normalMap = normal6;
+  
+     } 
+
+  if (event.target.id == "7"){
+
+     material.map = texture7;
+     material.roughnessMap = rough7;
+     material.normalMap = normal7;
+  
+     }              
 
 
 }
@@ -266,7 +305,7 @@ function onButtonClick(event) {
 
       var colorPicker = new iro.ColorPicker("#picker", {
       // Set the size of the color picker
-      width: 190,
+      width: 90,
       // Set the initial color to WHITE
       color: "#ffffff"
       });
@@ -334,17 +373,22 @@ function onButtonClick(event) {
 
         const modelLoader = new GLTFLoader(loadingManager );
         modelLoader.setDRACOLoader( dracoLoader );
-        modelLoader.load( './assets/Tribal.glb', function ( gtlf ) {
+        modelLoader.load( './assets/Tribal_min.glb', function ( gtlf ) {
 
            //const fullmodel = gtlf.scene//.children[0].children[0].geometry//.children[0].geometry;
            const model = gtlf.scene.children[0].geometry//.children[0].geometry;
+           //const normMat = new  THREE.MeshNormalMaterial
            //console.log(model)
+           model.scale(.5,.5,.5)
            let tribalMesh = new THREE.Mesh( model, material );
-            tribalMesh.position.z = 20
-              tribalMesh.position.y = -35
-                tribalMesh.position.x = -30
-           tribalMesh.rotation.y = Math.PI / 1.1;
+            // tribalMesh.position.z = 0  //20
+            //   tribalMesh.position.y = 0
+            //     tribalMesh.position.x = 0  //-30
+          tribalMesh.rotation.y = Math.PI /1;
+          // const scal = new THREE.Vector3( 0.5, 0.5, 0.5 );
+      
            scene.add( tribalMesh );
+           scene.updateWorldMatrix (true )
 
         } );
 
@@ -360,7 +404,7 @@ function onButtonClick(event) {
         // const ambientLight = new THREE.AmbientLight( 0x404040, .1);
         // scene.add( ambientLight );
 
-        // const pointLight = new THREE.PointLight( 0xffffff, .1);
+        // const pointLight = new THREE.PointLight( 0xffffff, 1);
         // pointLight.position.z = 5;
         // pointLight.decay = 2;
         // scene.add( pointLight );
@@ -401,15 +445,55 @@ function download() {
 async function downloadAR() {
     //console.log(scene.children[0])
     const exporter = new USDZExporter();
+    scene.updateWorldMatrix (true)
     const arraybuffer = await exporter.parse( scene.children[0]);
     //console.log(arraybuffer);
     //const blob = new Blob( [ arraybuffer ], { type: 'application/octet-stream' } );
-    saveArrayBuffer(arraybuffer, 'scene.usdz')
+    saveArrayBuffer(arraybuffer, 'Tribal.usdz')
     
   
 }
 
 
+async function arView() {
+    //console.log(scene.children[0])
+    const exporter = new USDZExporter();
+    scene.updateWorldMatrix (true)
+    const arraybuffer = await exporter.parse( scene.children[0]);
+    //console.log(arraybuffer);
+    const blob = new Blob( [ arraybuffer ], { type: 'application/octet-stream' } );
+     console.log(blob);
+    viewAR(blob, 'Tribal.usdz')
+   
+   
+}
+
+function viewAR(blob, filename) {
+  // link.href = URL.createObjectURL(blob);
+  // link.rel = "ar";
+  // link.download = filename;
+  // link.click();
+
+// const blob = new Blob( [ data ], { type: 'application/octet-stream' });
+    const a = Object.assign(document.createElement('a'), {
+            download:'model.usdz',
+            rel:"ar",
+            href:URL.createObjectURL(blob )
+        });
+    const i = makeImage();
+    a.appendChild(i);
+
+        a.click();
+    }
+
+
+ function makeImage() {
+    const c = document.createElement('canvas');
+    
+    const i = new Image();
+    i.src = c.toDataURL();
+    return i;
+  }
 
 
 
@@ -417,9 +501,11 @@ function saveArrayBuffer(buffer, filename) {
   save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
 }
 
+
 const link = document.createElement('a');
 link.style.display = 'none';
 document.body.appendChild(link); // Firefox workaround, see #6594
+
 
 function save(blob, filename) {
   link.href = URL.createObjectURL(blob);
